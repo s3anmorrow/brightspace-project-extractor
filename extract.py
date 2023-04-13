@@ -61,6 +61,6 @@ def main():
                     p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder, shell=True)
                     p.wait()
 
-    print("EXTRACTOR -> project extraction complete")
+    print("\033[0;33m","EXTRACTOR -> project extraction complete")
 
 main()

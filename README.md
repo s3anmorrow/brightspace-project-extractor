@@ -6,19 +6,29 @@ When multiple students submit a project to Brightspace, the projects files are d
 This python script automates this by going into each student's folder and unzipping the project files
 
 ## Usage
-Copy the extract.py file into the folder containing the student folders. Then run the script using the following command in the terminal:
+Copy the extract.py file into the folder containing the student folders:
+
+> ![student folders](images/before.png)
+
+Then run the script using the following command in the terminal:
 
 ```
 python extract.py
 ``` 
 
-The script will go through all folders in the directory and unzip any zip files it finds within them
+The script will go through all folders in the directory and unzip any zip files it finds within them:
+
+> ![unzipped project folders](images/after.png)
 
 ## Requirements
 - Python 3.6 or higher
 
 ## Options
 The script has the following options:
-- aaa
+- automatically run an "npm install" on each project folder once unzipper (Requires Node.js installation). Command:
+```
+python extract.py -npm
+```
+
 - bbb
 - ccc
