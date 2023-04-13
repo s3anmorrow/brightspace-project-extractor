@@ -52,14 +52,14 @@ def main():
             zip_ref.extractall(zipFilePath)
 
             # do npm install if specified in arguments
-            if len(args) > 1 and args[1] == "-npm":
-                # get project folder extracted from zip file (should only be one)
-                projectFolders = getFolders(zipFilePath)
-                # run npm install on each extracted folder
-                for projectFolder in projectFolders:
-                    print("\033[0;33m","EXTRACTOR -> running npm install in: " + projectFolder)
-                    p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder)
-                    p.wait()
+            # if len(args) > 1 and (args[1] == "-npm" or args[1] == "-n"):
+            # get project folder extracted from zip file (should only be one)
+            projectFolders = getFolders(zipFilePath)
+            # run npm install on each extracted folder
+            for projectFolder in projectFolders:
+                print("\033[0;33m","EXTRACTOR -> running npm install in: " + projectFolder)
+                p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder, shell=True)
+                p.wait()
 
     print("EXTRACTOR -> project extraction complete")
 
