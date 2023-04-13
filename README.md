@@ -1,25 +1,24 @@
 # Brightspace Project Extractor
 
-Due to the large size of projects folders submitted by students to Brightspace, it is required that they be zipped before uploading. This python script will
+## The Problem
+When multiple students submit a project to Brightspace, the projects files are downloaded in batch as a giant zip file. This file is unzipped into a set of folders - one for each student containing their submitted project files. But what happens if the student zips up their project files and submits that? You end up with a zip file inside each student's folder. The instructor then has to go and manually unzip each zip file in each student's folder. What a mess.
 
-## Features
+This python script automates this by going into each student's folder and unzipping the project files
 
-The extension adds the following to VS Code:
-- a shiny new button to the status bar that opens the current project folder in GitKraken
-
-> ![added status bar button](https://raw.githubusercontent.com/s3anmorrow/openWithKraken/main/images/button.png)
-
-- a new command to the Command Palette (Ctrl+Shift+P) called "Open with GitKraken" that opens the current project folder
-
-> ![added command](https://raw.githubusercontent.com/s3anmorrow/openWithKraken/main/images/command.png)
-
-Selecting either will open up your current project folder in GitKraken. It does this by executing the following shell command:
+## Usage
+Copy the extract.py file into the folder containing the student folders. Then run the script using the following command in the terminal:
 
 ```
-gitkraken -p "[path to project folder]"
-```
+python extract.py
+``` 
 
-The extension will display error messages if: 
-- a project / workspace is not currently opened 
-- GitKraken is not installed on the machine
-- the path to gitkraken.exe is not setup correctly in the PATH environment variable of windows ([C:\Users\[windows username]\AppData\Local\gitkraken\bin]). This should have been done automatically when installing GitKraken.
+The script will go through all folders in the directory and unzip any zip files it finds within them
+
+## Requirements
+- Python 3.6 or higher
+
+## Options
+The script has the following options:
+- aaa
+- bbb
+- ccc
