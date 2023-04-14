@@ -1,9 +1,9 @@
 # Brightspace Project Extractor
 
-## The Problem
+## Problem
 When multiple students submit a project to Brightspace, the projects files are downloaded in batch as a giant zip file. This file is unzipped into a set of folders - one for each student containing their submitted project files. But what happens if the student zips up their project files and submits that? You end up with a zip file inside each student's folder. The instructor then has to go and manually unzip each zip file in each student's folder. What a mess.
 
-This python script automates this by going into each student's folder and unzipping the project files
+This python script automates this by going into each student's folder and unzipping the project files. It also includes some options to automate node.js installations, etc.
 
 ## Usage
 Copy the extract.py file into the folder containing the student folders:
