@@ -22,11 +22,19 @@ def getFolders(folderPath):
 
 # -------------------------------------------- main method
 def main():
+    print("\033[0;31m","------------------------------------------------------------")
     print("\033[0;31m","EXTRACTOR -> Project Extractor v1.0 - Sean Morrow [Apr 2023]")
+
+    # check if one of the arguments is -path
+    if ("-path" in args):
+        # get the path from the argument
+        path = args[args.index("-path") + 1]
+        # check if the path ends with a slash
+        if (path[-1] != "/"):
+            path += "/"
 
     # get list of all student folders downloaded for project from brightspace
     studentfolders = getFolders(path)
-    print(studentfolders)
 
     # go through each folder and extract the zip file inside it
     for studentFolder in studentfolders:
@@ -51,8 +59,8 @@ def main():
         with zipfile.ZipFile(zipFilePath + zipFile, 'r') as zip_ref:
             zip_ref.extractall(zipFilePath)
 
-            # do npm install if specified in arguments
-            if len(args) > 1 and (args[1] == "-npm" or args[1] == "-n"):
+            # check if one of the arguments is -npm
+            if ("-npm" in args):
                 # get project folder extracted from zip file (should only be one)
                 projectFolders = getFolders(zipFilePath)
                 # run npm install on each extracted folder

@@ -25,10 +25,17 @@ The script will go through all folders in the directory and unzip any zip files 
 
 ## Options
 The script has the following options:
+- by default the python script will search the current folder for student folders and unzip any zip files it finds within them. You can adjust this with the -path option. For example, if you want to search the folder "student_projects" for student folders, you would use the following command:
+``` 
+python extract.py -path student_projects
+``` 
+  
+- by default the script will not delete the zip files after unzipping them. You can adjust this with the -delete option. For example, if you want to delete the zip files after unzipping them, you would use the following command:
+```
+python extract.py -delete
+```
+  
 - automatically run an "npm install" on each project folder once unzipper (Requires Node.js installation). Command:
 ```
 python extract.py -npm
 ```
-
-- bbb
-- ccc
