@@ -59,6 +59,10 @@ def main():
         with zipfile.ZipFile(zipFilePath + zipFile, 'r') as zip_ref:
             zip_ref.extractall(zipFilePath)
 
+            # delete the zip file
+            if ("-delete" in args):
+                os.remove(zipFilePath + zipFile)
+
             # check if one of the arguments is -npm
             if ("-npm" in args):
                 # get project folder extracted from zip file (should only be one)
