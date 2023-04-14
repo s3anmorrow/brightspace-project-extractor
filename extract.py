@@ -4,10 +4,6 @@ import os
 import subprocess
 import sys
 
-# set the current working folder
-path = "./"
-args = sys.argv
-
 # -------------------------------------------- private methods
 def getFolders(folderPath):
     foldersList = []
@@ -23,7 +19,12 @@ def getFolders(folderPath):
 # -------------------------------------------- main method
 def main():
     print("\033[0;31m","------------------------------------------------------------")
-    print("\033[0;31m","EXTRACTOR -> Project Extractor v1.0 - Sean Morrow [Apr 2023]")
+    print("\033[0;31m","EXTRACTOR -> Brightspace Project Extractor v1.0 - Sean Morrow [Apr 2023]")
+
+    # get arguments passed to script (options)
+    args = sys.argv
+    # default path
+    path = "./"
 
     # check if one of the arguments is -path
     if ("-path" in args):
@@ -47,7 +48,7 @@ def main():
         
         # test if no zip file was found in folder
         if zipFile == "":
-            print("\033[0;31m","EXTRACTOR -> No zip file found in folder: " + studentFolder)
+            print("\033[0;33m","EXTRACTOR -> Skipped : No zip file found in folder: " + studentFolder)
             continue
 
         # get the path to the zip file in student's folder
@@ -69,10 +70,10 @@ def main():
                 projectFolders = getFolders(zipFilePath)
                 # run npm install on each extracted folder
                 for projectFolder in projectFolders:
-                    print("\033[0;33m","EXTRACTOR -> running npm install in: " + projectFolder)
+                    print("\033[0;32m","EXTRACTOR -> running npm install in: " + projectFolder)
                     p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder, shell=True)
                     p.wait()
 
-    print("\033[0;33m","EXTRACTOR -> project extraction complete")
+    print("\033[0;31m","EXTRACTOR -> project extraction complete")
 
 main()
