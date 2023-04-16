@@ -21,7 +21,7 @@ The script will go through all folders in the directory and unzip any zip files 
 > ![unzipped project folders](images/after.png)
 
 ## Requirements
-- Python 3.6 or higher
+- Python 3.6 or higher (easiest to install via MS Store)
 
 ## Options
 The script has the following options:
@@ -33,7 +33,7 @@ python extract.py -path student_projects/year1
 ``` 
 
 ### -delete
-By default, the script will not delete the zip files after unzipping them. You can adjust this with the -delete option. For example, if you want to delete the zip files after unzipping them, you would use the following command:
+By default, the script will not delete the zip files after unzipping them. You can adjust this with the -delete option. Use the following command:
 ```
 python extract.py -delete
 ```
