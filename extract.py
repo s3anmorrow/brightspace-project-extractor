@@ -59,11 +59,6 @@ def main():
         # extract the zip file
         with zipfile.ZipFile(zipFilePath + zipFile, 'r') as zip_ref:
             zip_ref.extractall(zipFilePath)
-
-            # delete the zip file
-            if ("-delete" in args):
-                os.remove(zipFilePath + zipFile)
-
             # check if one of the arguments is -npm
             if ("-npm" in args):
                 # get project folder extracted from zip file (should only be one)
@@ -73,6 +68,11 @@ def main():
                     print("\033[0;32m","EXTRACTOR -> running npm install in: " + projectFolder)
                     p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder, shell=True)
                     p.wait()
+
+        # delete the zip file
+        if ("-delete" in args):
+            print("\033[0;32m","EXTRACTOR -> deleting : " + zipFilePath + zipFile)
+            os.remove(zipFilePath + zipFile)
 
     print("\033[0;31m","EXTRACTOR -> project extraction complete")
 
