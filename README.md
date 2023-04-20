@@ -8,26 +8,35 @@ This python script automates this by going into each student's folder and unzipp
 ## Usage
 Copy the extract.py file into the folder containing the student folders:
 
-> ![student folders](images/before.png)
+![student folders](/images/before.png)
 
-Then run the script using the following command in the terminal:
+Then run the script using the following command in the terminal in one of two ways (depending on python installation):
 
 ```
 python extract.py
 ``` 
+```
+python3 extract.py
+```
 
 The script will go through all folders in the directory and unzip any zip files it finds within them:
 
-> ![unzipped project folders](images/after.png)
+![unzipped project folders](/images/after.png)
 
 ## Requirements
 - Python 3.6 or higher  
     Install via MS Store (windows) or Homebrew (mac)
 - Python modules: py7zr / rarfile  
-    Install with command `pip3 install py7zr rarfile`
+    Install with command:
+    ```
+    pip3 install py7zr rarfile
+    ```
     
 ## Options
 The script has the following options:
+
+### -help
+Use the -help option to see the available options
 
 ### -path
 By default, the python script will search the current folder for student folders and unzip any zip files it finds within them. You can adjust this with the -path option. For example, if you want to search the folder "student_projects/year1" for student folders, you would use the following command:

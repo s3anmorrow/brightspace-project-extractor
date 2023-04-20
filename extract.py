@@ -37,10 +37,24 @@ def main():
     # default path
     path = "./"
 
+    if ("-help" in args) or ("--help" in args):
+        print("\033[0;31m","Automate unzipping (zip/7z/rar) all student project folders downloaded from brightspace")
+        print("\033[0;31m","")
+        print("\033[0;31m","Usage: python extract.py [options]")
+        print("\033[0;31m","")
+        print("\033[0;31m","Options:")
+        print("\033[0;31m","-path <path> : path to folder containing student folders relative to extract.py")
+        print("\033[0;31m","-npm         : run npm install in each extracted project folder")
+        print("\033[0;31m","-delete      : delete zip file after extraction")
+        exit()
+
     # check if one of the arguments is -path
-    if ("-path" in args):
+    if ("-path" in args) or ("--path" in args):
         # get the path from the argument
-        path = args[args.index("-path") + 1]
+        if ("-path" in args):
+            path = args[args.index("-path") + 1]
+        else:
+            path = args[args.index("--path") + 1]
         # check if the path ends with a slash
         if (path[-1] != "/"):
             path += "/"
@@ -68,39 +82,49 @@ def main():
         print("\033[0;32m","EXTRACTOR -> extracting : " + zipFilePath + zipFile)
 
         # extract the zip / 7z / rar file
-        if (zipFile.endswith(".zip")):
-            with zipfile.ZipFile(zipFilePath + zipFile, 'r') as zip_ref:
-                zip_ref.extractall(zipFilePath)
-        elif (zipFile.endswith(".7z")):
-            with py7zr.SevenZipFile(zipFilePath + zipFile, 'r') as zip_ref:
-                try:
-                    zip_ref.extractall(zipFilePath)
-                except:
-                    print("\033[0;32m","EXTRACTOR -> Skipped : 7z already extracted")
-        elif (zipFile.endswith(".rar")):
-            with rarfile.RarFile(zipFilePath + zipFile, 'r') as zip_ref:
-                zip_ref.extractall(zipFilePath)
-            
-        # check if one of the arguments is -npm
-        if ("-npm" in args):
-            # get project folder extracted from zip file (should only be one)
-            projectFolders = getFolders(zipFilePath)
-            # run npm install on each extracted folder
-            for projectFolder in projectFolders:
-                print("\033[0;33m","EXTRACTOR -> running npm install in: " + projectFolder)
-                if (os.name == "nt"):
-                    # windows (needs shell=True to run npm install in windows)
-                    p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder, shell=True)
-                else:
-                    # linux
-                    p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder)
-                p.wait()
+        try:
+            if (zipFile.endswith(".zip")):
+                with zipfile.ZipFile(zipFilePath + zipFile, 'r') as zip_ref:
+                    try:
+                        zip_ref.extractall(zipFilePath)
+                    except:
+                        print("\033[0;32m","EXTRACTOR -> Skipped : zip unzipping issue")
+            elif (zipFile.endswith(".7z")):
+                with py7zr.SevenZipFile(zipFilePath + zipFile, 'r') as zip_ref:
+                    try:
+                        zip_ref.extractall(zipFilePath)
+                    except:
+                        print("\033[0;32m","EXTRACTOR -> Skipped : 7z unzipping issue")
+            elif (zipFile.endswith(".rar")):
+                with rarfile.RarFile(zipFilePath + zipFile, 'r') as zip_ref:
+                    try:
+                        zip_ref.extractall(zipFilePath)
+                    except:
+                        print("\033[0;32m","EXTRACTOR -> Skipped : rar unzipping issue")
 
-        # delete the zip file
-        if ("-delete" in args):
-            print("\033[0;33m","EXTRACTOR -> deleting : " + zipFilePath + zipFile)
-            os.remove(zipFilePath + zipFile)
+            # check if one of the arguments is -npm
+            if ("-npm" in args) or ("--npm" in args):
+                # get project folder extracted from zip file (should only be one)
+                projectFolders = getFolders(zipFilePath)
+                # run npm install on each extracted folder
+                for projectFolder in projectFolders:
+                    print("\033[0;33m","EXTRACTOR -> running npm install in: " + projectFolder)
+                    if (os.name == "nt"):
+                        # windows (needs shell=True to run npm install in windows)
+                        p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder, shell=True)
+                    else:
+                        # linux
+                        p = subprocess.Popen(["npm", "i"], cwd=zipFilePath + projectFolder)
+                    p.wait()
 
-    print("\033[0;31m","EXTRACTOR -> project extraction complete")
+            # delete the zip file
+            if ("-delete" in args) or ("--delete" in args):
+                print("\033[0;33m","EXTRACTOR -> deleting : " + zipFilePath + zipFile)
+                os.remove(zipFilePath + zipFile)
+
+        except:
+            print("\033[0;32m","EXTRACTOR -> Skipped : zip file corrupt issue")
+
+    print("\033[0;31m","EXTRACTOR -> project extraction complete","\033[0m")
 
 main()
