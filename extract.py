@@ -37,8 +37,19 @@ def main():
     # default path
     path = "./"
 
+    if ("-help" in args) or ("--help" in args):
+        print("\033[0;31m","Automate unzipping (zip/7z/rar) all student project folders downloaded from brightspace")
+        print("\033[0;31m","")
+        print("\033[0;31m","Usage: python extract.py [options]")
+        print("\033[0;31m","")
+        print("\033[0;31m","Options:")
+        print("\033[0;31m","-path <path> : path to folder containing student folders relative to extract.py")
+        print("\033[0;31m","-npm         : run npm install in each extracted project folder")
+        print("\033[0;31m","-delete      : delete zip file after extraction")
+        exit()
+
     # check if one of the arguments is -path
-    if ("-path" in args):
+    if ("-path" in args) or ("--path" in args):
         # get the path from the argument
         path = args[args.index("-path") + 1]
         # check if the path ends with a slash
@@ -82,7 +93,7 @@ def main():
                 zip_ref.extractall(zipFilePath)
             
         # check if one of the arguments is -npm
-        if ("-npm" in args):
+        if ("-npm" in args) or ("--npm" in args):
             # get project folder extracted from zip file (should only be one)
             projectFolders = getFolders(zipFilePath)
             # run npm install on each extracted folder
@@ -97,7 +108,7 @@ def main():
                 p.wait()
 
         # delete the zip file
-        if ("-delete" in args):
+        if ("-delete" in args) or ("--delete" in args):
             print("\033[0;33m","EXTRACTOR -> deleting : " + zipFilePath + zipFile)
             os.remove(zipFilePath + zipFile)
 
