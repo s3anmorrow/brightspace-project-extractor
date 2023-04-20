@@ -24,7 +24,10 @@ The script will go through all folders in the directory and unzip any zip files 
 - Python 3.6 or higher  
     Install via MS Store (windows) or Homebrew (mac)
 - Python modules: py7zr / rarfile  
-    Install with command `pip3 install py7zr rarfile`
+    Install with command:
+    ```
+    pip3 install py7zr rarfile
+    ```
     
 ## Options
 The script has the following options:
