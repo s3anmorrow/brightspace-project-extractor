@@ -32,6 +32,9 @@ The script will go through all folders in the directory and unzip any zip files 
 ## Options
 The script has the following options:
 
+### -help
+Use the -help option to see the available options
+
 ### -path
 By default, the python script will search the current folder for student folders and unzip any zip files it finds within them. You can adjust this with the -path option. For example, if you want to search the folder "student_projects/year1" for student folders, you would use the following command:
 ``` 
