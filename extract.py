@@ -51,7 +51,10 @@ def main():
     # check if one of the arguments is -path
     if ("-path" in args) or ("--path" in args):
         # get the path from the argument
-        path = args[args.index("-path") + 1]
+        if ("-path" in args):
+            path = args[args.index("-path") + 1]
+        else:
+            path = args[args.index("--path") + 1]
         # check if the path ends with a slash
         if (path[-1] != "/"):
             path += "/"
@@ -112,6 +115,6 @@ def main():
             print("\033[0;33m","EXTRACTOR -> deleting : " + zipFilePath + zipFile)
             os.remove(zipFilePath + zipFile)
 
-    print("\033[0;31m","EXTRACTOR -> project extraction complete")
+    print("\033[0;31m","EXTRACTOR -> project extraction complete","\033[0m")
 
 main()
