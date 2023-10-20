@@ -8,7 +8,7 @@ This python script automates this by going into each student's folder and unzipp
 ## Usage
 Copy the extract.py file into the folder containing the student folders:
 
-> ![student folders](images/before.png)
+> ![student folders](/images/before.png)
 
 Then run the script using the following command in the terminal:
 
@@ -18,7 +18,7 @@ python extract.py
 
 The script will go through all folders in the directory and unzip any zip files it finds within them:
 
-> ![unzipped project folders](images/after.png)
+> ![unzipped project folders](/images/after.png)
 
 ## Requirements
 - Python 3.6 or higher  
