@@ -84,16 +84,22 @@ def main():
         # extract the zip / 7z / rar file
         if (zipFile.endswith(".zip")):
             with zipfile.ZipFile(zipFilePath + zipFile, 'r') as zip_ref:
-                zip_ref.extractall(zipFilePath)
+                try:
+                    zip_ref.extractall(zipFilePath)
+                except:
+                    print("\033[0;32m","EXTRACTOR -> Skipped : zip unzipping issue")
         elif (zipFile.endswith(".7z")):
             with py7zr.SevenZipFile(zipFilePath + zipFile, 'r') as zip_ref:
                 try:
                     zip_ref.extractall(zipFilePath)
                 except:
-                    print("\033[0;32m","EXTRACTOR -> Skipped : 7z already extracted")
+                    print("\033[0;32m","EXTRACTOR -> Skipped : 7z unzipping issue")
         elif (zipFile.endswith(".rar")):
             with rarfile.RarFile(zipFilePath + zipFile, 'r') as zip_ref:
-                zip_ref.extractall(zipFilePath)
+                try:
+                    zip_ref.extractall(zipFilePath)
+                except:
+                    print("\033[0;32m","EXTRACTOR -> Skipped : rar unzipping issue")
             
         # check if one of the arguments is -npm
         if ("-npm" in args) or ("--npm" in args):
